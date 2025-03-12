@@ -26,7 +26,7 @@ export default async function getChatQuestions(): Promise<ChatCategory[]> {
       for (let month = 0; month < 12; month++) {
         // Skip past months in the current year
         if (year === currentYear && month < currentMonth) continue;
-        select.push(`${months[month]} ${year}`);
+        select.push(`📅 ${months[month]} ${year}`);
       }
     }
 
@@ -42,14 +42,21 @@ export default async function getChatQuestions(): Promise<ChatCategory[]> {
           category_id: 1,
           questions: [
             {
+              id: 1,
+              type: "string",
+              question:
+                "Hi! 👋 I'm your personality chat assistant. Let's get to know you better! Ready to start?",
+              options: { "1": "Yes, let's begin!" },
+            },
+            {
               id: 2,
               question: "Which option best describes your situation?",
               type: "string",
               options: {
-                "1": "Borrowing Capacity (I want to understand how much I can borrow to purchase a property.)",
-                "2": "Loan Health Check (I already have a loan but want to make sure I'm getting the best deal.)",
-                "3": "My Fixed Rate is Expiring (I have a fixed rate loan and want to know how much I could save.)",
-                "4": "Book an Appointment (I'd rather book an appointment to speak to someone about my situation)",
+                "1": "💵 Borrowing Capacity (I want to understand how much I can borrow to purchase a property.)",
+                "2": "💲Loan Health Check (I already have a loan but want to make sure I'm getting the best deal.)",
+                "3": " % My Fixed Rate is Expiring (I have a fixed rate loan and want to know how much I could save.)",
+                "4": "📆 Book an Appointment (I'd rather book an appointment to speak to someone about my situation)",
               },
             },
           ],
@@ -64,7 +71,7 @@ export default async function getChatQuestions(): Promise<ChatCategory[]> {
                 "What is your total household income each year before tax?",
               type: "element",
               options: {
-                "1": "income",
+                "1": "number",
               },
             },
             {
@@ -72,22 +79,33 @@ export default async function getChatQuestions(): Promise<ChatCategory[]> {
               question: "What are your monthly household expenses?",
               type: "string",
               options: {
-                "1": "$2,500",
-                "2": "$2,500 - $4,000",
-                "3": "$4,001 - $6,000",
-                "4": "$6,000+",
+                "1": "💰$2,500",
+                "2": "💰$2,500 - $4,000",
+                "3": "💰$4,001 - $6,000",
+                "4": "💰$6,000+",
               },
             },
             {
               id: 3,
-              question: "What is your name?",
-              type: "element",
+              question: "How big is your household?",
+              type: "string",
               options: {
-                "1": "name",
+                "1": "1",
+                "2": "2",
+                "3": "3",
+                "4": "4+",
               },
             },
             {
               id: 4,
+              question: "What is your name?",
+              type: "element",
+              options: {
+                "1": "text",
+              },
+            },
+            {
+              id: 5,
               question: "What is your email address?",
               type: "element",
               options: {
@@ -95,7 +113,7 @@ export default async function getChatQuestions(): Promise<ChatCategory[]> {
               },
             },
             {
-              id: 5,
+              id: 6,
               question: "What is your contact number?",
               type: "element",
               options: {
@@ -113,7 +131,7 @@ export default async function getChatQuestions(): Promise<ChatCategory[]> {
               question: "What is your property address?",
               type: "element",
               options: {
-                "1": "addresss",
+                "1": "text",
               },
             },
             {
@@ -121,8 +139,8 @@ export default async function getChatQuestions(): Promise<ChatCategory[]> {
               question: "What is your property type?",
               type: "string",
               options: {
-                "1": "Woner Occupied",
-                "2": "Investment",
+                "1": "🏠Woner Occupied",
+                "2": "🌆 Investment",
               },
             },
             {
@@ -130,7 +148,7 @@ export default async function getChatQuestions(): Promise<ChatCategory[]> {
               question: "Enter your current bank name?",
               type: "element",
               options: {
-                "1": "name",
+                "1": "text",
               },
             },
             {
@@ -138,7 +156,7 @@ export default async function getChatQuestions(): Promise<ChatCategory[]> {
               question: "Enter your approximate loan balance?",
               type: "element",
               options: {
-                "1": "amount",
+                "1": "number",
               },
             },
             {
@@ -146,7 +164,7 @@ export default async function getChatQuestions(): Promise<ChatCategory[]> {
               question: "Enter your current interest rate?",
               type: "element",
               options: {
-                "1": "number",
+                "1": "text",
               },
             },
             {
@@ -154,7 +172,7 @@ export default async function getChatQuestions(): Promise<ChatCategory[]> {
               question: "What is your name?",
               type: "element",
               options: {
-                "1": "name",
+                "1": "text",
               },
             },
             {
@@ -184,7 +202,7 @@ export default async function getChatQuestions(): Promise<ChatCategory[]> {
               question: "What is your approximate loan balance?",
               type: "element",
               options: {
-                "1": "amount",
+                "1": "number",
               },
             },
             {
@@ -192,7 +210,7 @@ export default async function getChatQuestions(): Promise<ChatCategory[]> {
               question: "Enter your current interest rate?",
               type: "element",
               options: {
-                "1": "number",
+                "1": "text",
               },
             },
             {
@@ -212,7 +230,7 @@ export default async function getChatQuestions(): Promise<ChatCategory[]> {
               question: "Enter your current bank name?",
               type: "element",
               options: {
-                "1": "name",
+                "1": "text",
               },
             },
             {
@@ -228,7 +246,7 @@ export default async function getChatQuestions(): Promise<ChatCategory[]> {
               question: "Enter roll of rate?",
               type: "element",
               options: {
-                "1": "number",
+                "1": "text",
               },
             },
             {
@@ -236,7 +254,7 @@ export default async function getChatQuestions(): Promise<ChatCategory[]> {
               question: "What is your name?",
               type: "element",
               options: {
-                "1": "name",
+                "1": "text",
               },
             },
             {
@@ -266,7 +284,7 @@ export default async function getChatQuestions(): Promise<ChatCategory[]> {
               question: "Enter your name?",
               type: "element",
               options: {
-                "1": "name",
+                "1": "text",
               },
             },
             {
