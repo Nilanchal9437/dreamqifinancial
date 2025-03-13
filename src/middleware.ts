@@ -5,53 +5,28 @@ export async function middleware(request: NextRequest): Promise<unknown> {
   const url = request?.nextUrl?.pathname;
 
   const token: any = request.cookies.get("dreamqifinancial");
-  const user: any = request.cookies.get("user")?.value
-    ? JSON.parse(`${request.cookies.get("user")?.value || ""}`)
-    : null;
 
   const AUTH_URL: string = `${process.env.DREAMQI_APP_BASE_URL}/login`;
 
-  const routeCondition = Boolean(
-    token?.value &&
-      user &&
-      (url === "/login" ||
-        url === "/signup" ||
-        url === "/forget-password" ||
-        url === "/")
-  );
-
-  if (
-    (!token?.value || !user) &&
-    url.includes("/admin") &&
-    !url.includes("/api")
-  ) {
-    const response = NextResponse.redirect(AUTH_URL);
-
-    response.cookies.delete("dreamqifinancial");
-    response.cookies.delete("user");
-
-    return response;
+  if (!token?.value && url !== "/login" && url !== "/") {
+    return NextResponse.redirect(AUTH_URL);
   } else {
-    if (
-      url !== "/" &&
-      !url.includes("/login") &&
-      !url.includes("/api/login") &&
-      !url.includes("/api/signup") &&
-      !url.includes("/api/forget-password")
-    ) {
+    if (!url.includes("/login") && url !== "/") {
       const verifys: any = await jwtVerify(
         token?.value,
         new TextEncoder().encode(`${process.env.JWT_SECRET}`)
       );
 
+      const user: any = JSON.parse(request.cookies.get("user")?.value || "");
+
       if (
-        verifys?.payload?.id &&
-        user?.role &&
-        user?.id === verifys?.payload?.id
+        verifys?.payload?.email &&
+        user?.email &&
+        user?.email === verifys?.payload?.email
       ) {
-        if (url.includes("/admin")) {
+        if (url === "/login") {
           return NextResponse.redirect(
-            `${process.env.OFFICER_APP_BASE_URL}/admin`
+            `${process.env.DREAMQI_APP_BASE_URL}/admin`
           );
         } else {
           return NextResponse.next();
@@ -64,12 +39,10 @@ export async function middleware(request: NextRequest): Promise<unknown> {
 
         return response;
       }
-    } else if (routeCondition) {
-      return NextResponse.redirect(`${process.env.OFFICER_APP_BASE_URL}/admin`);
     }
   }
 }
 
 export const config = {
-  matcher: ["/", "/login", "/admin", "/admin/:path*"],
+  matcher: ["/login", "/admin", "/admin/:path*"],
 };

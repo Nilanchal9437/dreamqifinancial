@@ -27,18 +27,18 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const token = await signToken({ id: user._id, role: user.role });
+    const token = await signToken({ id: user._id, email: user.email });
 
     const response = NextResponse.json(
       {
         message: "login successfully",
-        data: { id: user._id, role: user.role },
+        data: { id: user._id, email: user.email },
         status: true,
       },
       { status: 200 }
     );
 
-    response.cookies.set("officer", `${token}`, {
+    response.cookies.set("dreamqifinancial", `${token}`, {
       path: "/",
       secure: true,
       httpOnly: true,
@@ -51,10 +51,8 @@ export async function POST(req: NextRequest) {
       "user",
       `${JSON.stringify({
         id: user._id,
-        role: user.role,
         email: user.email,
         phone: user.phoneNumber,
-        company_id: user.company_id,
       })}`,
       {
         path: "/",

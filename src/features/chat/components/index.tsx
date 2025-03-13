@@ -4,6 +4,7 @@ import * as React from "react";
 import { MessageSquare, RotateCcw } from "lucide-react";
 import { ChatCategory } from "@/types/chat";
 import getChatQuestions from "@/features/chat/apis/getChat";
+import create from "@/features/chat/apis/submit";
 
 type Message = {
   id: string;
@@ -167,6 +168,7 @@ function Chat() {
     setAnswers(newAnswers);
 
     if (isLastQuestion()) {
+      await create(newAnswers);
       setTimeout(() => {
         setMessages((prev) => [
           ...prev,
