@@ -308,7 +308,7 @@ export default async function getChatQuestions(): Promise<ChatCategory[]> {
               question: "Enter your call date and time?",
               type: "element",
               options: {
-                "1": "date",
+                "1": "datetime-local",
               },
             },
           ],
